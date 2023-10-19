@@ -9,6 +9,10 @@ IOS;
 
 clock_t start,end;
 
+// int num;
+// cin>>num;
+// cout<<num<<"\n";
+
 int N;
 
 cin>>N;
@@ -21,13 +25,40 @@ for(int i=0;i<N;i++)
 puzzle[i]=(int *)malloc(N*sizeof(int));
 
 
-for(int i=0;i<N;i++){
+// for(int i=0;i<N;i++){
 
+//     for(int j=0;j<N;j++){
+//     cin>>puzzle[i][j];
+//     if(puzzle[i][j]==0)
+//     blank={i,j};
+//     }
+// }
+
+
+for(int i=0;i<N;i++){
     for(int j=0;j<N;j++){
-    cin>>puzzle[i][j];
-    if(puzzle[i][j]==0)
-    blank={i,j};
+        if(i == N-1 && j == N-1) {
+            // cout << "7,7\n";
+            blank={i,j};
+            puzzle[i][j] = 0;
+        } else {
+            int v = N*N - (i*N+j) - 1;
+            // if (i == 7 && j == 6) {
+            //     v--;
+            // } else if (i == 7 && j == 5) {
+            //     v++;
+            // }
+            puzzle[i][j] = v;
+        }
+        cout << puzzle[i][j] << "\n";
     }
+}
+
+if(!isSolvable(puzzle,N)){
+    int a = puzzle[N-1][N-2];
+    puzzle[N-1][N-2] = puzzle[N-1][N-3];
+    puzzle[N-1][N-3] = a;
+
 }
 
 start=clock();
